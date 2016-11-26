@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bridge.ChartJS", "Bridge.ChartJS\Bridge.ChartJS.csproj", "{79868924-0E43-4291-9F40-6A4D0AA6047F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{B37BB211-C242-4D6D-88F1-90CC740113CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79868924-0E43-4291-9F40-6A4D0AA6047F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79868924-0E43-4291-9F40-6A4D0AA6047F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79868924-0E43-4291-9F40-6A4D0AA6047F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79868924-0E43-4291-9F40-6A4D0AA6047F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37BB211-C242-4D6D-88F1-90CC740113CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37BB211-C242-4D6D-88F1-90CC740113CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37BB211-C242-4D6D-88F1-90CC740113CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37BB211-C242-4D6D-88F1-90CC740113CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

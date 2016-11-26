@@ -1,0 +1,1079 @@
+using Bridge;
+using System;
+using Bridge.Html5;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ChartJS
+{
+    using Context = Union<string, HTMLElement, CanvasRenderingContext2D>;
+
+    [External]
+    public class Chart
+    {
+        [Template("new Chart({0}, {1})")]
+        public Chart(Context ctx, ChartConfig options)
+        {
+
+        }
+
+        /// <summary>
+        /// Triggers an update of the chart. This can be safely called after replacing the entire data object. This will update all scales, legends, and then re-render the chart.
+        /// </summary>
+        public extern void Update();
+
+        /// <summary>
+        /// Use this to destroy any chart instances that are created. This will clean up any references stored to the chart object within Chart.js, along with any associated event listeners attached by Chart.js. This must be called before the canvas is reused for a new chart.
+        /// </summary>
+        public extern void Distroy();
+
+        /// <summary>
+        /// Triggers an update of the chart. This can be safely called after replacing the entire data object. This will update all scales, legends, and then re-render the chart.
+        /// </summary>
+        public extern void Update(int duration, bool lazy);
+
+        /// <summary>
+        /// Reset the chart to it's state before the initial animation. A new animation can then be triggered using update
+        /// </summary>
+        public extern void Reset();
+
+        /// <summary>
+        /// Triggers a redraw of all chart elements. Note, this does not update elements for new data. Use .update() in that case.
+        /// </summary>
+        /// <param name="duration">the time for the animation of the redraw in milliseconds</param>
+        /// <param name="lazy">if true, the animation can be interrupted by other animations</param>
+        public extern void Render(int duration, bool lazy);
+
+        /// <summary>
+        /// Use this to stop any current animation loop. This will pause the chart during any current animation frame. Call .render() to re-animate.
+        /// </summary>
+        public extern void Stop();
+
+        /// <summary>
+        /// Use this to manually resize the canvas element. This is run each time the canvas container is resized, but you can call this method manually if you change the size of the canvas nodes container element.
+        /// </summary>
+        public extern Chart Resize();
+
+        /// <summary>
+        /// Will clear the chart canvas. Used extensively internally between animation frames, but you might find it useful.
+        /// </summary>
+        /// <returns>this</returns>
+        public extern Chart Clear();
+
+        /// <summary>
+        /// This returns a base 64 encoded string of the chart in it's current state
+        /// </summary>
+        /// <returns></returns>
+        public extern string ToBase64Image();
+
+        /// <summary>
+        /// Returns an HTML string of a legend for that chart. The legend is generated from the legendCallback in the options.
+        /// </summary>
+        /// <returns></returns>
+        public extern string GenerateLegend();
+
+        /// <summary>
+        /// Calling getElementAtEvent(event) on your Chart instance passing an argument of an event, or jQuery event, will return the single element at the event position. If there are multiple items within range, only the first is returned
+        /// </summary>
+        public extern HTMLElement GetElementAtEvent(Event ev);
+
+        /// <summary>
+        /// Looks for the element under the event point, then returns all elements at the same data index. This is used internally for 'label' mode highlighting. Calling getElementsAtEvent(event) on your Chart instance passing an argument of an event, or jQuery event, will return the point elements that are at that the same position of that event.
+        /// </summary>
+        public extern HTMLElement[] GetElementsAtEvent(Event ev);
+
+        
+        public DataConfig Data;
+
+        [Template("Chart.defaults")]
+        public static extern Defaults Defaults();
+    }
+
+
+    public static class Extensions
+    {
+        
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class ChartConfig
+    {
+        public ChartType Type;
+        public DataConfig Data;
+        public ChartOptions Options;
+        public bool PointDot;
+        public int PointLabelFontSize;
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class ChartOptions
+    {
+        /// <summary>
+        /// Resizes the chart canvas when its container does.
+        /// </summary>
+        public bool Responsive = true;
+        /// <summary>
+        /// Duration in milliseconds it takes to animate to new size after a resize event.
+        /// </summary>
+        public int ResponsiveAnimationDuration = 0;
+        /// <summary>
+        /// Maintain the original canvas aspect ratio (width / height) when resizing
+        /// </summary>
+        public bool MaintainAspectRatio = true;
+
+        /// <summary>
+        /// Events that the chart should listen to for tooltips and hovering
+        /// </summary>
+        public string[] Event = new string[] { "mousemove", "mouseout", "click", "touchstart", "touchmove", "touchend" };
+        /// <summary>
+        /// Called if the event is of type 'mouseup' or 'click'. Called in the context of the chart and passed an array of active elements
+        /// </summary>
+        public Action OnClick;
+        /// <summary>
+        /// Function to generate a legend. Receives the chart object to generate a legend from. Default implementation returns an HTML string.
+        /// </summary>
+        public Func<Chart, string> LegendCallback;
+
+        public Action<Chart, object> OnResize;
+        /// <summary>
+        /// Legend configuration
+        /// </summary>
+        public LegendConfig Legend;
+        /// <summary>
+        /// Title configuration
+        /// </summary>
+        public TitleConfig Title;
+        /// <summary>
+        /// Layout config
+        /// </summary>
+        public LayoutConfig Layout;
+        /// <summary>
+        /// Tooltip config
+        /// </summary>
+        public TooltipConfig Tooltips;
+        /// <summary>
+        /// Hover configuration 
+        /// </summary>
+        public HoverConfig Hover;
+
+    }
+}
+namespace ChartJS
+{
+    [Enum(Emit.StringName)]
+    public enum ChartType
+    {
+        Line,
+        Bar,
+        HorizontalBar,
+        Radar,
+        Bubble,
+        Pie, 
+        Doughnut,
+        PolarArea
+    }
+}
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class DataConfig
+    {
+        public Dataset[] Datasets;
+        public string[] Labels;
+        public string[] XLabels;
+        public string[] YLabels;
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class Dataset
+    {
+
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class Defaults
+    {
+        /// <summary>
+        /// options defined for every chart
+        /// </summary>
+        public ChartOptions Global;
+    }
+}
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class LineDataPoint
+    {
+        public object X;
+        public object Y;
+    }
+}
+namespace ChartJS
+{
+    [Enum(Emit.StringName)]
+    public enum PointSyles
+    {
+        Circle,
+        Triangle,
+        Rect,
+        [Name("rectRot")]
+        RectRot,
+        Cross,
+        [Name("crossRot")]
+        CrossRot,
+        Star,
+        Line,
+        Dash
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class HoverConfig
+    {
+        /// <summary>
+        /// Sets which elements appear in the tooltip
+        /// </summary>
+        public IntersectionMode Mode;
+
+        /// <summary>
+        /// if true, the hover mode only applies when the mouse position intersects an item on the chart
+        /// </summary>
+        public bool Intersect;
+
+        /// <summary>
+        /// Duration in milliseconds it takes to animate hover style changes
+        /// </summary>
+        public int AnimationDuration;
+
+        /// <summary>
+        /// Called when any of the events fire. Called in the context of the chart and passed an array of active elements (bars, points, etc)
+        /// </summary>
+        public Action<object[]> OnHover;
+    }
+
+
+    [Enum(Emit.StringName)]
+    public enum IntersectionMode
+    {
+        /// <summary>
+        /// Finds all of the items that intersect the point
+        /// </summary>
+        Point,
+        /// <summary>
+        /// Gets the item that is nearest to the point. The nearest item is determined based on the distance to the center of the chart item (point, bar). If 2 or more items are at the same distance, the one with the smallest area is used. If intersect is true, this is only triggered when the mouse position intersects an item in the graph. This is very useful for combo charts where points are hidden behind bars.
+        /// </summary>
+        Nearest,
+        /// <summary>
+        /// Finds item at the same index. If the intersect setting is true, the first intersecting item is used to determine the index in the data. If intersect false the nearest item is used to determine the index. 
+        /// </summary>
+        Index,
+        /// <summary>
+        /// Finds items in the same dataset. If the intersect setting is true, the first intersecting item is used to determine the index in the data. If intersect false the nearest item is used to determine the index.
+        /// </summary>
+        Dataset,
+        /// <summary>
+        /// Returns all items that would intersect based on the X coordinate of the position only. Would be useful for a vertical cursor implementation. Note that this only applies to cartesian charts
+        /// </summary>
+        X,
+        /// <summary>
+        /// Returns all items that would intersect based on the Y coordinate of the position. This would be useful for a horizontal cursor implementation. Note that this only applies to cartesian charts.
+        /// </summary>
+        Y
+    }
+}
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class LayoutPadding
+    {
+        public int Left;
+        public int Right;
+        public int Top;
+        public int Bottom;
+    }
+    
+    [ObjectLiteral]
+    public class LayoutConfig
+    {
+
+        /// <summary>
+        /// The padding to add inside the chart. If this value is a number, it is applied to all sides of the chart (left, top, right, bottom). If this value is an object, the left property defines the left padding. Similarly the right, top, and bottom properties can also be specified.
+        /// </summary>
+        public Union<int, LayoutPadding> Padding = 0;
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class LegendConfig
+    {
+        /// <summary>
+        /// Is the legend displayed, default is true
+        /// </summary>
+        public bool Display = true;
+        /// <summary>
+        /// Position of the legend. 
+        /// </summary>
+        public Position Position = Position.Top;
+        /// <summary>
+        /// Marks that this box should take the full width of the canvas (pushing down other boxes)
+        /// </summary>
+        public bool FullWidth = true;
+        /// <summary>
+        /// Legend will show datasets in reverse order
+        /// </summary>
+        public bool Reverse = false;
+        /// <summary>
+        /// A callback that is called when a 'click' event is registered on top of a label item
+        /// </summary>
+        public Action<Event, object> OnClick;
+        /// <summary>
+        /// A callback that is called when a 'mousemove' event is registered on top of a label item
+        /// </summary>
+        public Action<Event, object> OnHover;
+        /// <summary>
+        /// label configuration of legend
+        /// </summary>
+        public LegendLabelConfig Labels;
+
+    }
+}
+
+namespace ChartJS
+{
+    [ObjectLiteral]
+    public class LegendLabelConfig
+    {
+        /// <summary>
+        /// Width of coloured box
+        /// </summary>
+        public int BoxWidth = 40;
+
+        /// <summary>
+        /// Font size inherited from global configuration
+        /// </summary>
+        public int FontSize = 12;
+        /// <summary>
+        /// Font style inherited from global configuration
+        /// </summary>
+        public string FontStyle = "normal";
+        /// <summary>
+        /// Font color inherited from global configuration
+        /// </summary>
+        public string FontColor = "#666";
+        /// <summary>
+        /// "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif"
+        /// </summary>
+        public string FontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+        /// <summary>
+        /// Padding between rows of colored boxes
+        /// </summary>
+        public int Padding = 10;
+        /// <summary>
+        /// Generates legend items for each thing in the legend. Default implementation returns the text + styling for the color box
+        /// </summary>
+        public Action<Chart> GenerateLabels;
+        /// <summary>
+        /// Label style will match corresponding point style (size is based on fontSize, boxWidth is not used in this case).
+        /// </summary>
+        public bool UsePointStyle = false;
+    }
+}
+
+namespace ChartJS
+{
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [Enum(Emit.StringName)]
+    public enum Position
+    {
+        Top, Left, Right, Bottom
+    }
+
+    
+
+    [ObjectLiteral]
+    public class TitleConfig
+    {
+        /// <summary>
+        /// Display the title block
+        /// </summary>
+        public bool Display = false;
+        /// <summary>
+        /// Position of the title.
+        /// </summary>
+        public Position Position = Position.Top;
+        /// <summary>
+        /// Marks that this box should take the full width of the canvas (pushing down other boxes)
+        /// </summary>
+        public bool FullWidth = true;
+        /// <summary>
+        /// Font size inherited from global configuration
+        /// </summary>
+        public int FontSize = 12;
+        /// <summary>
+        /// Font family inherited from global configuration
+        /// </summary>
+        public string FontFamily = "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+        /// <summary>
+        /// Font color 
+        /// </summary>
+        public Color FontColor = "#666";
+        /// <summary>
+        /// Font style, default is 'bold'
+        /// </summary>
+        public string FontStyle = "bold";
+        /// <summary>
+        /// Number of pixels to add above and below the title text
+        /// </summary>
+        public int Padding = 10;
+        /// <summary>
+        /// Title text
+        /// </summary>
+        public string Text = "";
+    }
+}
+
+namespace ChartJS
+{
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    using TooltipCallback = Action<TooltipItem[], DataConfig>;
+
+    using Strings = Union<string, string[]>;
+
+    [ObjectLiteral]
+    public class TooltipConfig
+    {
+        /// <summary>
+        /// Are tooltips enabled
+        /// </summary>
+        public bool Enabled = true;
+        /// <summary>
+        /// Sets which elements appear in the tooltip. 
+        /// </summary>
+        public IntersectionMode Mode = IntersectionMode.Nearest;
+        /// <summary>
+        /// if true, the tooltip mode applies only when the mouse position intersects with an element. If false, the mode will be applied at all times.
+        /// </summary>
+        public bool Intersect = true;
+        /// <summary>
+        /// The mode for positioning the tooltip. 'average' mode will place the tooltip at the average position of the items displayed in the tooltip. 'nearest' will place the tooltip at the position of the element closest to the event position. New modes can be defined by adding functions to the Chart.Tooltip.positioners map.
+        /// </summary>
+        public string Position = "average";
+        /// <summary>
+        /// Allows sorting of tooltip items. Must implement at minimum a function that can be passed to Array.prototype.sort. This function can also accept a third parameter that is the data object passed to the chart
+        /// </summary>
+        public object ItemSort;
+        /// <summary>
+        /// Allows filtering of tooltip items. Must implement at minimum a function that can be passed to Array.prototype.filter. This function can also accept a second parameter that is the data object passed to the chart.
+        /// </summary>
+        public object Filter;
+        /// <summary>
+        /// Background color of the tooltip
+        /// </summary>
+        public Color BackgroundColor = "rgba(0,0,0,0.8)";
+        /// <summary>
+        /// Font family for tooltip title inherited from global font family
+        /// </summary>
+        public string TitleFontFamily;
+        /// <summary>
+        /// Font size for tooltip title inherited from global font size
+        /// </summary>
+        public int TitleFontSize = 12;
+
+        public string TitleFontStyle;
+
+        public Color TitleFontColor;
+
+        /// <summary>
+        /// Spacing to add to top and bottom of each title line.
+        /// </summary>
+        public int TitleSpacing = 2;
+        /// <summary>
+        /// Margin to add on bottom of title section
+        /// </summary>
+        public int TitleMarginBottom = 6;
+
+        public string BodyFontFamily;
+
+        public int BodyFontSize = 12;
+
+        public string BodyFontStyle;
+
+        public Color BodyFontColor;
+
+        public int BodySpacing = 2;
+
+        public string FooterFontFamily;
+
+        public int FooterFontSize = 12;
+
+        public string FooterFontStyle;
+
+        public Color FooterFontColor;
+
+        public int FooterSpacing = 2;
+
+        /// <summary>
+        /// Padding to add on left and right of tooltip
+        /// </summary>
+        public int XPadding = 6;
+
+        /// <summary>
+        /// Padding to add on top and bottom of tooltip
+        /// </summary>
+        public int YPadding = 6;
+
+        /// <summary>
+        /// Size, in px, of the tooltip arrow
+        /// </summary>
+        public int CaretSize = 5;
+
+        /// <summary>
+        /// Radius of tooltip corner curves
+        /// </summary>
+        public int CornerRadius = 6;
+
+        /// <summary>
+        /// Color to draw behind the colored boxes when multiple items are in the tooltip
+        /// </summary>
+        public Color MultiKeyBackground;
+
+        /// <summary>
+        /// if true, color boxes are shown in the tooltip
+        /// </summary>
+        public bool DisplayColors;
+
+        public TooltipCallbacks Callbacks;
+    }
+
+
+    [ObjectLiteral]
+    public class TooltipCallbacks
+    {
+        /// <summary>
+        /// Text to render before the title
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> BeforeTitle;
+        /// <summary>
+        /// Text to render as the title
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> Title;
+        /// <summary>
+        /// Text to render after the title
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> AfterTitle;
+        /// <summary>
+        /// Text to render before the body section
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> BeforeBody;
+        /// <summary>
+        /// Text to render before an individual label
+        /// </summary>
+        public Func<TooltipItem, DataConfig, Strings> BeforeLabel;
+        /// <summary>
+        /// Text to render for an individual item in the tooltip
+        /// </summary>
+        public Func<TooltipItem, DataConfig, Strings> Label;
+        /// <summary>
+        /// Returns the colors to render for the tooltip item. Return as an object containing two parameters: borderColor and backgroundColor.
+        /// </summary>
+        public Func<TooltipItem, Chart, LabelColorObject> LabelColor;
+        /// <summary>
+        /// Text to render after an individual label
+        /// </summary>
+        public Func<TooltipItem, DataConfig, Strings> AfterLabel;
+        /// <summary>
+        /// Text to render after the body section
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> AfterBody;
+        /// <summary>
+        /// Text to render before the footer section
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> BeforeFooter;
+        /// <summary>
+        /// Text to render as the footer
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> Footer;
+        /// <summary>
+        /// Text to render after the footer section
+        /// </summary>
+        public Func<TooltipItem[], DataConfig, Strings> AfterFooter;
+        /// <summary>
+        /// List of matching point informations
+        /// </summary>
+        public Func<TooltipItem[], Strings> DataPoints;
+
+
+    }
+
+
+    [ObjectLiteral]
+    public class LabelColorObject
+    {
+        public Color BorderColor;
+        public Color BackgroundColor;
+    }
+
+
+    [ObjectLiteral]
+    public class TooltipItem
+    {
+        /// <summary>
+        /// X Value of the tooltip as a string
+        /// </summary>
+        public string xLabel;
+        /// <summary>
+        /// Y value of the tooltip as a string
+        /// </summary>
+        public string yLabel;
+        /// <summary>
+        /// Index of the dataset the item comes from
+        /// </summary>
+        public int DatasetIndex;
+        /// <summary>
+        /// Index of this data item in the dataset
+        /// </summary>
+        public int Index;
+        /// <summary>
+        /// X position of matching point
+        /// </summary>
+        public int x;
+        /// <summary>
+        /// Y position of matching point
+        /// </summary>
+        public int y;
+    }
+}
+
+namespace ChartJS
+{
+    using Number = Union<int, double>;
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class BarDataset : Dataset
+    {
+        public Union<int[], double[], decimal[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// The ID of the x axis to plot this dataset on
+        /// </summary>
+        [Name("xAxisID")]
+        public string XAxisId;
+        /// <summary>
+        /// The ID of the y axis to plot this dataset on
+        /// </summary>
+        [Name("yAxisID")]
+        public string YAxisId;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// Which edge to skip drawing the border for. Options are 'bottom', 'left', 'top', and 'right'
+        /// </summary>
+        public Union<string, string[]> BorderSkipped;
+
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color HoverBackgroundColor;
+
+        /// <summary>
+        /// Border width of bar in pixels
+        /// </summary>
+        public NumberOrNumbers BorderWidth;
+        /// <summary>
+        /// border color when hovered
+        /// </summary>
+        public Color HoverBorderColor;
+        /// <summary>
+        /// Border width when hovered
+        /// </summary>
+        public Number HoverBorderWidth;
+    }
+}
+
+namespace ChartJS
+{
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class BubbleDataset : Dataset
+    {
+        public Union<int[], double[], decimal[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color HoverBackgroundColor;
+        /// <summary>
+        /// Border width of bar in pixels
+        /// </summary>
+        public NumberOrNumbers BorderWidth;
+        /// <summary>
+        /// border color when hovered
+        /// </summary>
+        public Color HoverBorderColor;
+        /// <summary>
+        /// Border width when hovered
+        /// </summary>
+        public NumberOrNumbers HoverBorderWidth;
+        /// <summary>
+        /// Additional radius to add to data radius on hover
+        /// </summary>
+        public NumberOrNumbers HoverRadius;
+    }
+}
+
+namespace ChartJS
+{
+    using Number = Union<int, double>;
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class LineDataset : Dataset
+    {
+        public Union<int[], double[], decimal[], LineDataPoint[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// If true, fill the area under the line
+        /// </summary>
+        public bool Fill;
+        /// <summary>
+        /// Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used. Note This was renamed from 'tension' but the old name still works.
+        /// </summary>
+        public Number LineTension;
+        /// <summary>
+        /// The ID of the x axis to plot this dataset on
+        /// </summary>
+        [Name("xAxisID")]
+        public string XAxisId;
+        /// <summary>
+        /// The ID of the y axis to plot this dataset on
+        /// </summary>
+        [Name("yAxisID")]
+        public string YAxisId;
+        /// <summary>
+        /// Algorithm used to interpolate a smooth curve from the discrete data points. Options are 'default' and 'monotone'. The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets. The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if any) stay at input data points. If left untouched (undefined), the global options.elements.line.cubicInterpolationMode property is used.
+        /// </summary>
+        public string CubicInterpolationMode;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Cap style of the line
+        /// </summary>
+        public string BorderCapStyle;
+        /// <summary>
+        /// Length and spacing of dashes. 
+        /// </summary>
+        public NumberOrNumbers BorderDash;
+        /// <summary>
+        /// Offset for line dashes
+        /// </summary>
+        public Number BorderDashOffset;
+        /// <summary>
+        /// Line joint style
+        /// </summary>
+        public string BorderJoinStyle;
+        /// <summary>
+        /// The border color for points.
+        /// </summary>
+        public Color PointBorderColor;
+        /// <summary>
+        /// The fill color for points
+        /// </summary>
+        public Color PointBackgroundColor;
+        /// <summary>
+        /// The width of the point border in pixels
+        /// </summary>
+        public Color PointBorderWidth;
+        /// <summary>
+        /// The radius of the point shape. If set to 0, nothing is rendered. 
+        /// </summary>
+        public Number PointRadius;
+        /// <summary>
+        /// The radius of the point when hovered
+        /// </summary>
+        public Number PointHoverRadius;
+        /// <summary>
+        /// The pixel size of the non-displayed point that reacts to mouse events
+        /// </summary>
+        public Number PointHitRadius;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color PointHoverBackgroundColor;
+        /// <summary>
+        /// Point border color when hovered
+        /// </summary>
+        public Color PointHoverBorderColor;
+        /// <summary>
+        /// Border width of point when hovered
+        /// </summary>
+        public Number PointHoverBorderWidth;
+        /// <summary>
+        /// The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. If the option is an image, that image is drawn on the canvas using drawImage. 
+        /// </summary>
+        public Union<PointSyles, PointSyles[]> PointStyle;
+        /// <summary>
+        /// The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. If the option is an image, that image is drawn on the canvas using drawImage. 
+        /// </summary>
+        [Name("pointStyle")]
+        public Union<ImageData, ImageData[]> PointSyleAsImage;
+        /// <summary>
+        /// If false, the line is not drawn for this dataset
+        /// </summary>
+        public bool ShowLine;
+        /// <summary>
+        /// If true, lines will be drawn between points with no or null data
+        /// </summary>
+        public bool ShowGaps;
+        /// <summary>
+        /// If true, the line is shown as a stepped line and 'lineTension' will be ignored
+        /// </summary>
+        public bool SteppedLine;
+    }
+}
+
+namespace ChartJS
+{
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class PieOrDoughnutDataset : Dataset
+    {
+        public Union<int[], double[], decimal[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color HoverBackgroundColor;
+
+        /// <summary>
+        /// Border width of bar in pixels
+        /// </summary>
+        public NumberOrNumbers BorderWidth;
+        /// <summary>
+        /// border color when hovered
+        /// </summary>
+        public Color HoverBorderColor;
+        /// <summary>
+        /// Border width when hovered
+        /// </summary>
+        public NumberOrNumbers HoverBorderWidth;
+    }
+}
+
+namespace ChartJS
+{
+    using Number = Union<int, double>;
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class PolarAreaDataset : Dataset
+    {
+        public Union<int[], double[], decimal[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color HoverBackgroundColor;
+
+        /// <summary>
+        /// Border width of bar in pixels
+        /// </summary>
+        public NumberOrNumbers BorderWidth;
+        /// <summary>
+        /// border color when hovered
+        /// </summary>
+        public Color HoverBorderColor;
+        /// <summary>
+        /// Border width when hovered
+        /// </summary>
+        public NumberOrNumbers HoverBorderWidth;
+    }
+}
+
+namespace ChartJS
+{
+    using Number = Union<int, double>;
+    using NumberOrNumbers = Union<int, double, int[], double[]>;
+
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    public class RadarDataset : Dataset
+    {
+        public Union<int[], double[], decimal[]> Data;
+        /// <summary>
+        /// The label for the dataset which appears in the legend and tooltips
+        /// </summary>
+        public string Label;
+        /// <summary>
+        /// If true, fill the area under the line
+        /// </summary>
+        public bool Fill;
+        /// <summary>
+        /// Bezier curve tension of the line. Set to 0 to draw straightlines. This option is ignored if monotone cubic interpolation is used. Note This was renamed from 'tension' but the old name still works.
+        /// </summary>
+        public Number LineTension;
+        /// <summary>
+        /// Algorithm used to interpolate a smooth curve from the discrete data points. Options are 'default' and 'monotone'. The 'default' algorithm uses a custom weighted cubic interpolation, which produces pleasant curves for all types of datasets. The 'monotone' algorithm is more suited to y = f(x) datasets : it preserves monotonicity (or piecewise monotonicity) of the dataset being interpolated, and ensures local extremums (if any) stay at input data points. If left untouched (undefined), the global options.elements.line.cubicInterpolationMode property is used.
+        /// </summary>
+        public string CubicInterpolationMode;
+        /// <summary>
+        /// The fill color under the line
+        /// </summary>
+        public Color BackgroundColor;
+        /// <summary>
+        /// The color of the line.
+        /// </summary>
+        public Color BorderColor;
+        /// <summary>
+        /// Cap style of the line
+        /// </summary>
+        public string BorderCapStyle;
+        /// <summary>
+        /// Length and spacing of dashes. 
+        /// </summary>
+        public NumberOrNumbers BorderDash;
+        /// <summary>
+        /// Offset for line dashes
+        /// </summary>
+        public Number BorderDashOffset;
+        /// <summary>
+        /// Line joint style
+        /// </summary>
+        public string BorderJoinStyle;
+        /// <summary>
+        /// The border color for points.
+        /// </summary>
+        public Color PointBorderColor;
+        /// <summary>
+        /// The pixel size of the non-displayed point that reacts to mouse events
+        /// </summary>
+        public NumberOrNumbers HitRadius;
+        /// <summary>
+        /// The fill color for points
+        /// </summary>
+        public Color PointBackgroundColor;
+        /// <summary>
+        /// The width of the point border in pixels
+        /// </summary>
+        public Color PointBorderWidth;
+        /// <summary>
+        /// The radius of the point shape. If set to 0, nothing is rendered. 
+        /// </summary>
+        public Number PointRadius;
+        /// <summary>
+        /// The radius of the point when hovered
+        /// </summary>
+        public Number PointHoverRadius;
+        /// <summary>
+        /// The pixel size of the non-displayed point that reacts to mouse events
+        /// </summary>
+        public Number PointHitRadius;
+        /// <summary>
+        /// Point background color when hovered
+        /// </summary>
+        public Color PointHoverBackgroundColor;
+        /// <summary>
+        /// Point border color when hovered
+        /// </summary>
+        public Color PointHoverBorderColor;
+        /// <summary>
+        /// Border width of point when hovered
+        /// </summary>
+        public Number PointHoverBorderWidth;
+        /// <summary>
+        /// The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. If the option is an image, that image is drawn on the canvas using drawImage. 
+        /// </summary>
+        public Union<PointSyles, PointSyles[]> PointStyle;
+        /// <summary>
+        /// The style of point. Options are 'circle', 'triangle', 'rect', 'rectRot', 'cross', 'crossRot', 'star', 'line', and 'dash'. If the option is an image, that image is drawn on the canvas using drawImage. 
+        /// </summary>
+        [Name("pointStyle")]
+        public Union<ImageData, ImageData[]> PointSyleAsImage;
+    }
+}

@@ -52,6 +52,13 @@ namespace Bridge.ChartJS
         /// Hover configuration 
         /// </summary>
         public HoverConfig Hover;
-
+        /// <summary>
+        /// Animation configurations
+        /// </summary>
+        public AnimationConfig Animation;
+        /// <summary>
+        /// Elements configuration
+        /// </summary>
+        public ElementConfig Elements;
     }
 }

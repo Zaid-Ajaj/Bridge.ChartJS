@@ -45,6 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChartOptions\AnimationConfig.cs" />
+    <Compile Include="ChartOptions\ElementConfig.cs" />
+    <Compile Include="ChartOptions\ElementConfig\ArcConfig.cs" />
+    <Compile Include="ChartOptions\ElementConfig\PointConfig.cs" />
+    <Compile Include="ChartOptions\ElementConfig\LineConfig.cs" />
+    <Compile Include="ChartOptions\ElementConfig\RectangleConfig.cs" />
     <Compile Include="ChartOptions\HoverConfig.cs" />
     <Compile Include="ChartOptions\LayoutConfig.cs" />
     <Compile Include="ChartOptions\LegendConfig.cs" />

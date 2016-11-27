@@ -17,16 +17,19 @@ namespace Examples
                 yield return random.Next(1, 100);
         }
 
+
+        static string RGB(byte red, byte green, byte blue, double opacity) => $"rgba({red}, {green}, {blue}, {opacity})";
+
         public static void Main()
         {
             var canvas = Document.GetElementById("chartCanvas") as HTMLCanvasElement;
 
-            var lineChart = new Chart(canvas, new ChartConfig
+            var radarChart = new Chart(canvas, new ChartConfig
             {
                 Type = ChartType.Radar,
                 Data = new DataConfig
                 {
-                    Labels = new string[] { "Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running" },
+                    Labels = new [] { "Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running" },
                     Datasets = new Dataset[]
                     {
                         new RadarDataset
@@ -35,7 +38,7 @@ namespace Examples
                             Data = new int[] { 65, 59, 90, 81, 56, 55, 40 },
                             PointRadius = 10,
                             PointHoverRadius = 5,
-                            BackgroundColor = "rgba(0, 100, 255, 0.4)",
+                            BackgroundColor = RGB(0, 100, 255, 0.5),
                             PointHoverBackgroundColor = "blue",
                         },
                         new RadarDataset
@@ -54,13 +57,13 @@ namespace Examples
 
             Window.SetInterval(() =>
             {
-                var fstDataset = lineChart.Data.Datasets[0].As<RadarDataset>();
+                var fstDataset = radarChart.Data.Datasets[0].As<RadarDataset>();
                 fstDataset.Data = Random(7).ToArray();
 
-                var sndDataset = lineChart.Data.Datasets[1].As<RadarDataset>();
+                var sndDataset = radarChart.Data.Datasets[1].As<RadarDataset>();
                 sndDataset.Data = Random(7).ToArray();
 
-                lineChart.Update();
+                radarChart.Update();
 
             }, 2000);
 

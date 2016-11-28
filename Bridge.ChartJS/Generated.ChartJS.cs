@@ -494,6 +494,90 @@ namespace ChartJS
 
 namespace ChartJS
 {
+    [ObjectLiteral]
+    public class ScaleConfig
+    {
+        /// <summary>
+        /// Type of scale being employed.
+        /// </summary>
+        public ScaleType Scale;
+        /// <summary>
+        /// If true, show the scale including gridlines, ticks, and labels. Overrides gridLines.display, scaleLabel.display, and ticks.display.
+        /// </summary>
+        public bool Display;
+        /// <summary>
+        /// Position of the scale
+        /// </summary>
+        public Position Position;
+        /// <summary>
+        /// The ID is used to link datasets and scale axes together. The properties datasets.xAxisID or datasets.yAxisID have to match the scale properties scales.xAxes.id or scales.yAxes.id. This is especially needed if multi-axes charts are used.
+        /// </summary>
+        public string Id;
+        /// <summary>
+        /// Callback called before the update process starts
+        /// </summary>
+        public Action<ScaleConfig> BeforeUpdate;
+        /// <summary>
+        /// Callback that runs before dimensions are set
+        /// </summary>
+        public Action<ScaleConfig> BeforeSetDimensions;
+        /// <summary>
+        /// Callback that runs after dimensions are set. 
+        /// </summary>
+        public Action<ScaleConfig> AfterSetDimensions;
+        /// <summary>
+        /// Callback that runs before data limits are determined
+        /// </summary>
+        public Action<ScaleConfig> BeforeDataLimits;
+        /// <summary>
+        /// Callback that runs after data limits are determined
+        /// </summary>
+        public Action<ScaleConfig> AfterDataLimits;
+        /// <summary>
+        /// Callback that runs before ticks are created
+        /// </summary>
+        public Action<ScaleConfig> BeforeBuildTicks;
+        /// <summary>
+        /// Callback that runs after ticks are created
+        /// </summary>
+        public Action<ScaleConfig> AfterBuildTicks;
+        /// <summary>
+        /// Callback that runs before ticks are converted into strings. Passed a single argument, the scale instance.
+        /// </summary>
+        public Action<ScaleConfig> BeforeTickToLabelConversion;
+        /// <summary>
+        /// Callback that runs after ticks are converted into strings
+        /// </summary>
+        public Action<ScaleConfig> AfterTickToLabelConversion;
+        /// <summary>
+        /// Callback that runs before tick rotation is determined
+        /// </summary>
+        public Action<ScaleConfig> BeforeCalculateTickRotation;
+        /// <summary>
+        /// Callback that runs after tick rotation is determined
+        /// </summary>
+        public Action<ScaleConfig> AfterCalculateTickRotation;
+        /// <summary>
+        /// Callback that runs before the scale fits to the canvas
+        /// </summary>
+        public Action<ScaleConfig> BeforeFit;
+        /// <summary>
+        /// Callback that runs after the scale fits to the canvas
+        /// </summary>
+        public Action<ScaleConfig> AfterFit;
+        /// <summary>
+        /// Callback that runs at the end of the update process
+        /// </summary>
+        public Action<ScaleConfig> AfterUpdate;
+    }
+
+    [Enum(Emit.StringName)]
+    public enum ScaleType { Category, Linear, Logarithmic, Time, RadialLinear }
+}
+
+
+namespace ChartJS
+{
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [Enum(Emit.StringName)]
@@ -976,6 +1060,9 @@ namespace ChartJS
 
 namespace ChartJS
 {
+
+    using Number = Union<int, double, float, byte>;
+
     using NumberOrNumbers = Union<int, double, int[], double[]>;
 
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
@@ -983,7 +1070,7 @@ namespace ChartJS
     [ObjectLiteral]
     public class BubbleDataset : Dataset
     {
-        public Union<int[], double[], decimal[]> Data;
+        public BubbleDataPoint[] Data;
         /// <summary>
         /// The label for the dataset which appears in the legend and tooltips
         /// </summary>
@@ -1016,6 +1103,21 @@ namespace ChartJS
         /// Additional radius to add to data radius on hover
         /// </summary>
         public NumberOrNumbers HoverRadius;
+    }
+
+
+    [ObjectLiteral]
+    public class BubbleDataPoint
+    {
+        [Name("x")]
+        public Number X;
+        [Name("y")]
+        public Number Y;
+        /// <summary>
+        /// Radius of the bubble
+        /// </summary>
+        [Name("r")]
+        public Number Radius; 
     }
 }
 

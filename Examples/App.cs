@@ -13,8 +13,7 @@ namespace Examples
         static IEnumerable<int> Random(int count)
         {
             var random = new Random();
-            for (int i = 1; i <= count; i++)
-                yield return random.Next(1, 100);
+            for (int i = 1; i <= count; i++) yield return random.Next(1, 100);
         }
 
 
@@ -48,7 +47,7 @@ namespace Examples
                             PointRadius = 10,
                             PointHoverRadius = 5,
                             BackgroundColor = "rgba(0, 255, 100, 0.4)",
-                            PointHoverBackgroundColor = "green"
+                            PointHoverBackgroundColor = "green",
                         }
                     }
                 }

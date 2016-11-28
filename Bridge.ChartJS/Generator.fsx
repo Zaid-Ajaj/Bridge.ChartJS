@@ -21,6 +21,7 @@ let getSourceFiles() =
     |> Seq.filter (fun file -> not (file.Contains(destinationFile)))
     |> Seq.filter (fun file -> not (file.Contains("AssemblyInfo.cs")))
     |> Seq.filter (fun file -> not (file.Contains("obj\Debug")))
+    |> Seq.filter (fun file -> not (file.Contains("obj\Release")))
     |> List.ofSeq
 
 

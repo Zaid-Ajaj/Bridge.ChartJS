@@ -54,6 +54,7 @@
     <Compile Include="ChartOptions\LayoutConfig.cs" />
     <Compile Include="ChartOptions\LegendConfig.cs" />
     <Compile Include="ChartOptions\LegendLabelConfig.cs" />
+    <Compile Include="ChartOptions\ScaleConfig.cs" />
     <Compile Include="ChartOptions\TitleConfig.cs" />
     <Compile Include="ChartOptions\TooltipConfig.cs" />
     <Compile Include="Datasets\BarDataset.cs" />

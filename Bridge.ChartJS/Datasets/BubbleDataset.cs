@@ -2,6 +2,9 @@
 
 namespace Bridge.ChartJS
 {
+
+    using Number = Union<int, double, float, byte>;
+
     using NumberOrNumbers = Union<int, double, int[], double[]>;
 
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
@@ -9,7 +12,7 @@ namespace Bridge.ChartJS
     [ObjectLiteral]
     public class BubbleDataset : Dataset
     {
-        public Union<int[], double[], decimal[]> Data;
+        public BubbleDataPoint[] Data;
         /// <summary>
         /// The label for the dataset which appears in the legend and tooltips
         /// </summary>
@@ -42,5 +45,20 @@ namespace Bridge.ChartJS
         /// Additional radius to add to data radius on hover
         /// </summary>
         public NumberOrNumbers HoverRadius;
+    }
+
+
+    [ObjectLiteral]
+    public class BubbleDataPoint
+    {
+        [Name("x")]
+        public Number X;
+        [Name("y")]
+        public Number Y;
+        /// <summary>
+        /// Radius of the bubble
+        /// </summary>
+        [Name("r")]
+        public Number Radius; 
     }
 }

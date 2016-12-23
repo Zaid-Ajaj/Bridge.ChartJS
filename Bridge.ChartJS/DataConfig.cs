@@ -1,6 +1,7 @@
 ﻿namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class DataConfig
     {
         public Dataset[] Datasets;

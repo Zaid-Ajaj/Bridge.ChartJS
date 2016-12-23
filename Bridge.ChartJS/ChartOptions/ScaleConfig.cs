@@ -5,6 +5,7 @@ using System;
 namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ScaleConfig
     {
         /// <summary>
@@ -79,6 +80,10 @@ namespace Bridge.ChartJS
         /// Callback that runs at the end of the update process
         /// </summary>
         public Action<ScaleConfig> AfterUpdate;
+        /// <summary>
+        /// Ticks configurations
+        /// </summary>
+        public TicksConfig Ticks;
     }
 
     [Enum(Emit.StringName)]

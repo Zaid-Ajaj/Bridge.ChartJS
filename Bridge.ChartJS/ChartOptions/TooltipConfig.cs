@@ -11,6 +11,7 @@ namespace Bridge.ChartJS
     using Strings = Union<string, string[]>;
 
     [ObjectLiteral]
+    [External]
     public class TooltipConfig
     {
         /// <summary>
@@ -118,6 +119,7 @@ namespace Bridge.ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class TooltipCallbacks
     {
         /// <summary>
@@ -178,6 +180,7 @@ namespace Bridge.ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class LabelColorObject
     {
         public Color BorderColor;
@@ -186,6 +189,7 @@ namespace Bridge.ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class TooltipItem
     {
         /// <summary>

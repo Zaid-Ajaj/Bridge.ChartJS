@@ -4,6 +4,7 @@ using System;
 namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LegendConfig
     {
         /// <summary>

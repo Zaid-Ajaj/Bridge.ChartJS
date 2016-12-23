@@ -48,8 +48,6 @@ let getFilesWithoutUsings() =
     
 
 [ 
-    "using Bridge;"
-    "using System;"
     getUsingsOnly()
     getFilesWithoutUsings()
 ]

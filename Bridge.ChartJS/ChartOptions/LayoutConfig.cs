@@ -1,6 +1,7 @@
 ﻿namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LayoutPadding
     {
         public int Left;
@@ -10,6 +11,7 @@
     }
     
     [ObjectLiteral]
+    [External]
     public class LayoutConfig
     {
 

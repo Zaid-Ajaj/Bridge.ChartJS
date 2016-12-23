@@ -1,5 +1,3 @@
-using Bridge;
-using System;
 using Bridge.Html5;
 using System;
 using System.Collections.Generic;
@@ -103,6 +101,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ChartConfig
     {
         public ChartType Type;
@@ -116,6 +115,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ChartOptions
     {
         /// <summary>
@@ -173,6 +173,22 @@ namespace ChartJS
         /// Elements configuration
         /// </summary>
         public ElementConfig Elements;
+        /// <summary>
+        /// Scales configuration
+        /// </summary>
+        public Scales Scales;
+    }
+
+
+    [ObjectLiteral]
+    [External]
+    public class Scales
+    {
+        [Name("xAxis")]
+        public ScaleConfig[] XAxis;
+
+        [Name("yAxis")]
+        public ScaleConfig[] YAxis;
     }
 }
 namespace ChartJS
@@ -193,6 +209,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class DataConfig
     {
         public Dataset[] Datasets;
@@ -205,6 +222,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class Dataset
     {
 
@@ -214,6 +232,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class Defaults
     {
         /// <summary>
@@ -225,6 +244,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LineDataPoint
     {
         public object X;
@@ -253,6 +273,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class AnimationConfig
     {
         /// <summary>
@@ -315,6 +336,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ElementConfig
     {
         /// <summary>
@@ -339,6 +361,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class HoverConfig
     {
         /// <summary>
@@ -395,6 +418,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LayoutPadding
     {
         public int Left;
@@ -404,6 +428,7 @@ namespace ChartJS
     }
     
     [ObjectLiteral]
+    [External]
     public class LayoutConfig
     {
 
@@ -417,6 +442,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LegendConfig
     {
         /// <summary>
@@ -454,6 +480,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class LegendLabelConfig
     {
         /// <summary>
@@ -495,6 +522,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ScaleConfig
     {
         /// <summary>
@@ -569,6 +597,10 @@ namespace ChartJS
         /// Callback that runs at the end of the update process
         /// </summary>
         public Action<ScaleConfig> AfterUpdate;
+        /// <summary>
+        /// Ticks configurations
+        /// </summary>
+        public TicksConfig Ticks;
     }
 
     [Enum(Emit.StringName)]
@@ -589,6 +621,7 @@ namespace ChartJS
     
 
     [ObjectLiteral]
+    [External]
     public class TitleConfig
     {
         /// <summary>
@@ -640,6 +673,7 @@ namespace ChartJS
     using Strings = Union<string, string[]>;
 
     [ObjectLiteral]
+    [External]
     public class TooltipConfig
     {
         /// <summary>
@@ -747,6 +781,7 @@ namespace ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class TooltipCallbacks
     {
         /// <summary>
@@ -807,6 +842,7 @@ namespace ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class LabelColorObject
     {
         public Color BorderColor;
@@ -815,6 +851,7 @@ namespace ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class TooltipItem
     {
         /// <summary>
@@ -851,6 +888,7 @@ namespace ChartJS
     /// Arcs are used in the polar area, doughnut and pie charts
     /// </summary>
     [ObjectLiteral]
+    [External]
     public class ArcConfig
     {
         /// <summary>
@@ -872,9 +910,9 @@ namespace ChartJS
 {
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
     using Number = Union<int, double>;
-    using NumberOrNumbers = Union<int, double, int[], double[]>;
 
     [ObjectLiteral]
+    [External]
     public class LineConfig
     {
         /// <summary>
@@ -931,6 +969,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class PointConfig
     {
         /// <summary>
@@ -975,6 +1014,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class RectangleConfig
     {
         /// <summary>
@@ -1002,12 +1042,105 @@ namespace ChartJS
 
 namespace ChartJS
 {
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+    using Number = Union<int, double>;
+
+    [ObjectLiteral]
+    [External]
+    public class TicksConfig
+    {
+        /// <summary>
+        /// If true, automatically calculates how many labels that can be shown and hides labels accordingly. Turn it off to show all labels no matter what
+        /// </summary>
+        public bool AutoSkip;
+        /// <summary>
+        /// Padding between the ticks on the horizontal axis when autoSkip is enabled. Note: Only applicable to horizontal scales.
+        /// </summary>
+        public int AutoSkipPadding;
+        /// <summary>
+        /// If true, show the ticks.
+        /// </summary>
+        public bool Display;
+        /// <summary>
+        /// Font color for the tick labels
+        /// </summary>
+        public Color FontColor;
+        /// <summary>
+        /// Font family for the tick labels, follows CSS font-family options.
+        /// </summary>
+        public string FontFamily;
+        /// <summary>
+        /// Font size for the tick labels.
+        /// </summary>
+        public int FontSize;
+        /// <summary>
+        /// Distance in pixels to offset the label from the centre point of the tick (in the y direction for the x axis, and the x direction for the y axis). Note: this can cause labels at the edges to be cropped by the edge of the canvas
+        /// </summary>
+        public int LabelOffset;
+        /// <summary>
+        /// Maximum rotation for tick labels when rotating to condense labels. Note: Rotation doesn't occur until necessary. Note: Only applicable to horizontal scales.
+        /// </summary>
+        public Union<int, double, float> MaxRotation;
+        /// <summary>
+        /// Minimum rotation for tick labels. Note: Only applicable to horizontal scales.
+        /// </summary>
+        public Union<int, double, float> MinRotation;
+        /// <summary>
+        /// Flips tick labels around axis, displaying the labels inside the chart instead of outside. Note: Only applicable to vertical scales.
+        /// </summary>
+        public bool Mirror;
+        /// <summary>
+        /// Padding between the tick label and the axis. Note: Only applicable to horizontal scales.
+        /// </summary>
+        public int Padding;
+        /// <summary>
+        /// Reverses order of tick labels.
+        /// </summary>
+        public bool Reverse;
+        /// <summary>
+        /// if true, scale will include 0 if it is not already included.
+        /// </summary>
+        public bool BeginAtZero;
+        /// <summary>
+        /// User defined minimum number for the scale, overrides minimum value from data.
+        /// </summary>
+        public Number Min;
+        /// <summary>
+        /// User defined maximum number for the scale, overrides maximum value from data.
+        /// </summary>
+        public Number Max;
+        /// <summary>
+        /// Maximum number of ticks and gridlines to show. If not defined, it will limit to 11 ticks but will show all gridlines.
+        /// </summary>
+        public int MaxTicksLimit;
+        /// <summary>
+        /// User defined fixed step size for the scale. If set, the scale ticks will be enumerated by multiple of stepSize, having one tick per increment. If not set, the ticks are labeled automatically using the nice numbers algorithm.
+        /// </summary>
+        public Number FixedStepSize;
+        /// <summary>
+        /// if defined, it can be used along with the min and the max to give a custom number of steps. See the example below.
+        /// </summary>
+        public Number StepSize;
+        /// <summary>
+        /// User defined maximum number for the scale, overrides maximum value except for if it is lower than the maximum value.
+        /// </summary>
+        public Number SuggestedMax;
+        /// <summary>
+        /// User defined minimum number for the scale, overrides minimum value except for if it is higher than the minimum value.
+        /// </summary>
+        public Number SuggestedMin;
+    }
+}
+
+namespace ChartJS
+{
     using Number = Union<int, double>;
     using NumberOrNumbers = Union<int, double, int[], double[]>;
 
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class BarDataset : Dataset
     {
         public Union<int[], double[], decimal[]> Data;
@@ -1068,6 +1201,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class BubbleDataset : Dataset
     {
         public BubbleDataPoint[] Data;
@@ -1129,6 +1263,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class LineDataset : Dataset
     {
         public Union<int[], double[], decimal[], LineDataPoint[]> Data;
@@ -1249,6 +1384,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class PieOrDoughnutDataset : Dataset
     {
         public Union<int[], double[], decimal[]> Data;
@@ -1292,6 +1428,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class PolarAreaDataset : Dataset
     {
         public Union<int[], double[], decimal[]> Data;
@@ -1335,6 +1472,7 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class RadarDataset : Dataset
     {
         public Union<int[], double[], decimal[]> Data;

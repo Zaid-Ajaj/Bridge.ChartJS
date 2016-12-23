@@ -1,6 +1,7 @@
 ﻿namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ElementConfig
     {
         /// <summary>

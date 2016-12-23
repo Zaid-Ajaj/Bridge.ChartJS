@@ -3,6 +3,7 @@
 namespace Bridge.ChartJS
 {
     [ObjectLiteral]
+    [External]
     public class ChartOptions
     {
         /// <summary>
@@ -60,5 +61,21 @@ namespace Bridge.ChartJS
         /// Elements configuration
         /// </summary>
         public ElementConfig Elements;
+        /// <summary>
+        /// Scales configuration
+        /// </summary>
+        public Scales Scales;
+    }
+
+
+    [ObjectLiteral]
+    [External]
+    public class Scales
+    {
+        [Name("xAxis")]
+        public ScaleConfig[] XAxis;
+
+        [Name("yAxis")]
+        public ScaleConfig[] YAxis;
     }
 }

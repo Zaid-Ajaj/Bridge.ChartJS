@@ -7,6 +7,7 @@ namespace Bridge.ChartJS
     /// Arcs are used in the polar area, doughnut and pie charts
     /// </summary>
     [ObjectLiteral]
+    [External]
     public class ArcConfig
     {
         /// <summary>

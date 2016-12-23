@@ -1,5 +1,56 @@
-﻿Bridge.assembly("Bridge.ChartJS", function ($asm, globals) {
+Bridge.assembly("Bridge.ChartJS", function ($asm, globals) {
     "use strict";
+
+    Bridge.define("ChartJS.AnimationConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.AnimationDetails", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.AnimationObject", {
+        $literal: true
+    });
+
+    /** @namespace ChartJS */
+
+    /**
+     * Arcs are used in the polar area, doughnut and pie charts
+     *
+     * @public
+     * @class ChartJS.ArcConfig
+     */
+    Bridge.define("ChartJS.ArcConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.Dataset", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.BorderSkippedPattern", {
+        $kind: "enum",
+        statics: {
+            top: "top",
+            bottom: "bottom",
+            left: "left",
+            right: "right"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("ChartJS.BubbleDataPoint", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.ChartConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.ChartOptions", {
+        $literal: true
+    });
 
     Bridge.define("ChartJS.ChartType", {
         $kind: "enum",
@@ -16,7 +67,23 @@
         $utype: System.String
     });
 
+    Bridge.define("ChartJS.DataConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.Defaults", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.ElementConfig", {
+        $literal: true
+    });
+
     Bridge.define("ChartJS.Extensions");
+
+    Bridge.define("ChartJS.HoverConfig", {
+        $literal: true
+    });
 
     Bridge.define("ChartJS.IntersectionMode", {
         $kind: "enum",
@@ -91,6 +158,38 @@
         $utype: System.String
     });
 
+    Bridge.define("ChartJS.LabelColorObject", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LayoutConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LayoutPadding", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LegendConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LegendLabelConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LineConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LineDataPoint", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.PointConfig", {
+        $literal: true
+    });
+
     Bridge.define("ChartJS.PointSyles", {
         $kind: "enum",
         statics: {
@@ -116,5 +215,71 @@
             bottom: "bottom"
         },
         $utype: System.String
+    });
+
+    Bridge.define("ChartJS.RectangleConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.ScaleConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.ScaleType", {
+        $kind: "enum",
+        statics: {
+            category: "category",
+            linear: "linear",
+            logarithmic: "logarithmic",
+            time: "time",
+            radialLinear: "radialLinear"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("ChartJS.TitleConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.TooltipCallbacks", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.TooltipConfig", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.TooltipItem", {
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.BarDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.BubbleDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.LineDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.PieOrDoughnutDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.PolarAreaDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
+    });
+
+    Bridge.define("ChartJS.RadarDataset", {
+        inherits: [ChartJS.Dataset],
+        $literal: true
     });
 });

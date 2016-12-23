@@ -8,6 +8,7 @@ namespace Bridge.ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [ObjectLiteral]
+    [External]
     public class RadarDataset : Dataset
     {
         public Union<int[], double[], decimal[]> Data;

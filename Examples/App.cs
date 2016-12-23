@@ -28,7 +28,7 @@ namespace Examples
                 Type = ChartType.Radar,
                 Data = new DataConfig
                 {
-                    Labels = new [] { "Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running" },
+                    Labels = new[] { "Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running" },
                     Datasets = new Dataset[]
                     {
                         new RadarDataset
@@ -46,8 +46,24 @@ namespace Examples
                             Data = new int [] { 28, 48, 40, 19, 96, 27, 100 },
                             PointRadius = 10,
                             PointHoverRadius = 5,
-                            BackgroundColor = "rgba(0, 255, 100, 0.4)",
+                            BackgroundColor = RGB(0, 255, 100, 0.4),
                             PointHoverBackgroundColor = "green",
+                        }
+                    }
+                },
+                Options = new ChartOptions
+                {
+                    Scales = new Scales
+                    {
+                        XAxis = new ScaleConfig[]
+                        {
+                            new ScaleConfig
+                            {
+                                Ticks = new TicksConfig
+                                {
+                                    
+                                }
+                            }  
                         }
                     }
                 }

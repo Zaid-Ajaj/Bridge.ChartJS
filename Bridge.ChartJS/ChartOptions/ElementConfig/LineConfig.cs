@@ -5,9 +5,9 @@ namespace Bridge.ChartJS
 {
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
     using Number = Union<int, double>;
-    using NumberOrNumbers = Union<int, double, int[], double[]>;
 
     [ObjectLiteral]
+    [External]
     public class LineConfig
     {
         /// <summary>

@@ -1,10 +1,33 @@
-﻿/**
+/**
  * @version 1.0.0.0
  * @copyright Copyright ©  2016
- * @compiler Bridge.NET 15.4.0
+ * @compiler Bridge.NET 15.6.0
  */
 Bridge.assembly("Bridge.ChartJS", function ($asm, globals) {
     "use strict";
+
+    Bridge.define("Bridge.ChartJS.AnimationDetails", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ChartJS.AnimationObject", {
+        $literal: true
+    });
+
+    Bridge.define("Bridge.ChartJS.BorderSkippedPattern", {
+        $kind: "enum",
+        statics: {
+            top: "top",
+            bottom: "bottom",
+            left: "left",
+            right: "right"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("Bridge.ChartJS.BubbleDataPoint", {
+        $literal: true
+    });
 
     Bridge.define("Bridge.ChartJS.ChartType", {
         $kind: "enum",
@@ -119,6 +142,18 @@ Bridge.assembly("Bridge.ChartJS", function ($asm, globals) {
             left: "left",
             right: "right",
             bottom: "bottom"
+        },
+        $utype: System.String
+    });
+
+    Bridge.define("Bridge.ChartJS.ScaleType", {
+        $kind: "enum",
+        statics: {
+            category: "category",
+            linear: "linear",
+            logarithmic: "logarithmic",
+            time: "time",
+            radialLinear: "radialLinear"
         },
         $utype: System.String
     });

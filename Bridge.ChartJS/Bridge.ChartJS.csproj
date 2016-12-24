@@ -34,6 +34,7 @@
     <NoStdLib>true</NoStdLib>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ChartOptions\ScalesConfig\AngleLineConfig.cs" />
     <Compile Include="ChartOptions\AnimationConfig.cs" />
     <Compile Include="ChartOptions\ElementConfig.cs" />
     <Compile Include="ChartOptions\ElementConfig\ArcConfig.cs" />
@@ -47,6 +48,7 @@
     <Compile Include="ChartOptions\ScaleConfig.cs" />
     <Compile Include="ChartOptions\ScalesConfig\DisplayFormatConfig.cs" />
     <Compile Include="ChartOptions\ScalesConfig\TicksConfig.cs" />
+    <Compile Include="ChartOptions\TimeConfig.cs" />
     <Compile Include="ChartOptions\TitleConfig.cs" />
     <Compile Include="ChartOptions\TooltipConfig.cs" />
     <Compile Include="Datasets\BarDataset.cs" />

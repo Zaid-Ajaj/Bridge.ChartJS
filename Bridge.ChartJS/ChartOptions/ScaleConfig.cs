@@ -84,8 +84,28 @@ namespace Bridge.ChartJS
         /// Ticks configurations
         /// </summary>
         public TicksConfig Ticks;
+        /// <summary>
+        /// Time configurations
+        /// </summary>
+        public TimeConfig Time;
+        /// <summary>
+        /// If true, circular arcs are used else straight lines are used. The former is used by the polar area chart and the latter by the radar chart
+        /// </summary>
+        public bool LineArc;
+        /// <summary>
+        /// Config for angle lines, The following options are used to configure angled lines that radiate from the center of the chart to the point labels. They can be found in the angleLines sub options. Note that these options only apply if lineArc is false.
+        /// </summary>
+        public AngleLineConfig AngleLines;
+
     }
 
     [Enum(Emit.StringName)]
-    public enum ScaleType { Category, Linear, Logarithmic, Time, RadialLinear }
+    public enum ScaleType
+    {
+        Category,
+        Linear,
+        Logarithmic,
+        Time,
+        RadialLinear
+    }
 }

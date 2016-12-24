@@ -47,6 +47,7 @@
     <Compile Include="ChartOptions\LegendLabelConfig.cs" />
     <Compile Include="ChartOptions\ScaleConfig.cs" />
     <Compile Include="ChartOptions\ScalesConfig\DisplayFormatConfig.cs" />
+    <Compile Include="ChartOptions\ScalesConfig\PointLabelConfog.cs" />
     <Compile Include="ChartOptions\ScalesConfig\TicksConfig.cs" />
     <Compile Include="ChartOptions\TimeConfig.cs" />
     <Compile Include="ChartOptions\TitleConfig.cs" />

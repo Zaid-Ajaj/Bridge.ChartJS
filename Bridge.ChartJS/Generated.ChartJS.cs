@@ -601,12 +601,85 @@ namespace ChartJS
         /// Ticks configurations
         /// </summary>
         public TicksConfig Ticks;
+        /// <summary>
+        /// Time configurations
+        /// </summary>
+        public TimeConfig Time;
+        /// <summary>
+        /// If true, circular arcs are used else straight lines are used. The former is used by the polar area chart and the latter by the radar chart
+        /// </summary>
+        public bool LineArc;
+        /// <summary>
+        /// Config for angle lines, The following options are used to configure angled lines that radiate from the center of the chart to the point labels. They can be found in the angleLines sub options. Note that these options only apply if lineArc is false.
+        /// </summary>
+        public AngleLineConfig AngleLines;
+        /// <summary>
+        /// The following options are used to configure the point labels that are shown on the perimeter of the scale. They can be found in the pointLabels sub options. Note that these options only apply if lineArc is false.
+        /// </summary>
+        public PointLabelConfig PointLabels;
+
+
+
     }
 
     [Enum(Emit.StringName)]
-    public enum ScaleType { Category, Linear, Logarithmic, Time, RadialLinear }
+    public enum ScaleType
+    {
+        Category,
+        Linear,
+        Logarithmic,
+        Time,
+        RadialLinear
+    }
 }
 
+namespace ChartJS
+{
+    [ObjectLiteral]
+    [External]
+    public class TimeConfig
+    {
+        public DiplayFormatConfig DisplayFormats;
+        /// <summary>
+        /// If true and the unit is set to 'week', iso weekdays will be used.
+        /// </summary>
+        public bool IsoWeekday;
+        /// <summary>
+        /// The moment js format string to use for the tooltip.
+        /// </summary>
+        public bool TooltipFormat;
+        /// <summary>
+        /// If defined, will force the unit to be a certain type. See Time Units section below for details.
+        /// </summary>
+        public TimeUnit Unit;
+        /// <summary>
+        /// The minimum display format to be used for a time unit
+        /// </summary>
+        public TimeUnit MinUnit;
+        /// <summary>
+        /// The number of units between grid lines.
+        /// </summary>
+        public Union<int, double> UnitStepSize;
+        /// <summary>
+        /// If defined, dates will be rounded to the start of this unit. See Time Units below for the allowed units.
+        /// </summary>
+        public string Round;
+    }
+
+    [Enum(Emit.StringName)]
+    public enum TimeUnit
+    {
+        Millisecond,
+        Second,
+        Minute,
+        Hour,
+        Day,
+        Week,
+        Month,
+        Quarter,
+        Year
+    }
+}
 
 namespace ChartJS
 {
@@ -1042,6 +1115,78 @@ namespace ChartJS
 
 namespace ChartJS
 {
+    using Number = Union<int, double>;
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    [External]
+    public class AngleLineConfig
+    {
+        /// <summary>
+        /// If true, angle lines are shown.
+        /// </summary>
+        public bool Display;
+        /// <summary>
+        /// Color of angled lines
+        /// </summary>
+        public Color Color;
+        /// <summary>
+        /// Width of angled lines
+        /// </summary>
+        public Number LineWidth;
+    }
+}
+namespace ChartJS
+{
+    [ObjectLiteral]
+    [External]
+    public class DiplayFormatConfig
+    {
+        public string Millisecond;
+        public string Second;
+        public string Minute;
+        public string Hour;
+        public string Day;
+        public string Week;
+        public string Month;
+        public string Year;
+        public string Quarter;
+    }
+}
+
+namespace ChartJS
+{
+    using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
+
+    [ObjectLiteral]
+    [External]
+    public class PointLabelConfig
+    {
+        /// <summary>
+        /// Font size in pixels
+        /// </summary>
+        public int FontSize;
+        /// <summary>
+        /// Font Style to use
+        /// </summary>
+        public string FontStyle;
+        /// <summary>
+        /// Font family to render
+        /// </summary>
+        public string FontFamily;
+        /// <summary>
+        /// Font color
+        /// </summary>
+        public Color FontColor;
+        /// <summary>
+        /// Callback function to transform data label to axis label
+        /// </summary>
+        public dynamic Callback;
+    }
+}
+
+namespace ChartJS
+{
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
     using Number = Union<int, double>;
 
@@ -1129,6 +1274,24 @@ namespace ChartJS
         /// User defined minimum number for the scale, overrides minimum value except for if it is higher than the minimum value.
         /// </summary>
         public Number SuggestedMin;
+        /// <summary>
+        /// Color of label backdrops
+        /// </summary>
+        public Color BackdropColor;
+        /// <summary>
+        /// Horizontal padding of label backdrop
+        /// </summary>
+        [Name("backdropPaddingX")]
+        public Number BackdropPaddingX;
+        /// <summary>
+        /// Vertical padding of label backdrop
+        /// </summary>
+        [Name("backdropPaddingY")]
+        public Number BackdropPaddingY;
+        /// <summary>
+        /// If true, draw a background behind the tick labels
+        /// </summary>
+        public bool ShowLabelBackdrop;
     }
 }
 

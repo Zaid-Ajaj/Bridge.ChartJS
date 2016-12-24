@@ -89,5 +89,23 @@ namespace Bridge.ChartJS
         /// User defined minimum number for the scale, overrides minimum value except for if it is higher than the minimum value.
         /// </summary>
         public Number SuggestedMin;
+        /// <summary>
+        /// Color of label backdrops
+        /// </summary>
+        public Color BackdropColor;
+        /// <summary>
+        /// Horizontal padding of label backdrop
+        /// </summary>
+        [Name("backdropPaddingX")]
+        public Number BackdropPaddingX;
+        /// <summary>
+        /// Vertical padding of label backdrop
+        /// </summary>
+        [Name("backdropPaddingY")]
+        public Number BackdropPaddingY;
+        /// <summary>
+        /// If true, draw a background behind the tick labels
+        /// </summary>
+        public bool ShowLabelBackdrop;
     }
 }

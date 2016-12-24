@@ -96,6 +96,12 @@ namespace Bridge.ChartJS
         /// Config for angle lines, The following options are used to configure angled lines that radiate from the center of the chart to the point labels. They can be found in the angleLines sub options. Note that these options only apply if lineArc is false.
         /// </summary>
         public AngleLineConfig AngleLines;
+        /// <summary>
+        /// The following options are used to configure the point labels that are shown on the perimeter of the scale. They can be found in the pointLabels sub options. Note that these options only apply if lineArc is false.
+        /// </summary>
+        public PointLabelConfig PointLabels;
+
+
 
     }
 

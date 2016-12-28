@@ -90,12 +90,6 @@ namespace ChartJS
         [Template("Chart.defaults")]
         public static extern Defaults Defaults();
     }
-
-
-    public static class Extensions
-    {
-        
-    }
 }
 
 namespace ChartJS
@@ -194,6 +188,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [Enum(Emit.StringName)]
+    [External]
     public enum ChartType
     {
         Line,
@@ -254,6 +249,7 @@ namespace ChartJS
 namespace ChartJS
 {
     [Enum(Emit.StringName)]
+    [External]
     public enum PointSyles
     {
         Circle,
@@ -295,6 +291,7 @@ namespace ChartJS
     }
 
     [ObjectLiteral]
+    [External]
     public class AnimationDetails
     {
         public Chart ChartInstance;
@@ -305,6 +302,7 @@ namespace ChartJS
     }
 
     [ObjectLiteral]
+    [External]
     public class AnimationObject
     {
         /// <summary>
@@ -387,6 +385,7 @@ namespace ChartJS
 
 
     [Enum(Emit.StringName)]
+    [External]
     public enum IntersectionMode
     {
         /// <summary>
@@ -623,6 +622,7 @@ namespace ChartJS
     }
 
     [Enum(Emit.StringName)]
+    [External]
     public enum ScaleType
     {
         Category,
@@ -667,6 +667,7 @@ namespace ChartJS
     }
 
     [Enum(Emit.StringName)]
+    [External]
     public enum TimeUnit
     {
         Millisecond,
@@ -686,9 +687,13 @@ namespace ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [Enum(Emit.StringName)]
+    [External]
     public enum Position
     {
-        Top, Left, Right, Bottom
+        Top,
+        Left,
+        Right,
+        Bottom
     }
 
     
@@ -1109,7 +1114,14 @@ namespace ChartJS
     }
 
     [Enum(Emit.StringName)]
-    public enum BorderSkippedPattern { Top, Bottom, Left, Right }
+    [External]
+    public enum BorderSkippedPattern
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
 }
 
 
@@ -1404,6 +1416,7 @@ namespace ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class BubbleDataPoint
     {
         [Name("x")]

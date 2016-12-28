@@ -29,6 +29,7 @@ namespace Bridge.ChartJS
 
 
     [Enum(Emit.StringName)]
+    [External]
     public enum IntersectionMode
     {
         /// <summary>

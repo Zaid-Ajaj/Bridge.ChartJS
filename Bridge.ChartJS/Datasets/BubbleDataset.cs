@@ -50,6 +50,7 @@ namespace Bridge.ChartJS
 
 
     [ObjectLiteral]
+    [External]
     public class BubbleDataPoint
     {
         [Name("x")]

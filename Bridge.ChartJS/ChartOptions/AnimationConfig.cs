@@ -25,6 +25,7 @@ namespace Bridge.ChartJS
     }
 
     [ObjectLiteral]
+    [External]
     public class AnimationDetails
     {
         public Chart ChartInstance;
@@ -35,6 +36,7 @@ namespace Bridge.ChartJS
     }
 
     [ObjectLiteral]
+    [External]
     public class AnimationObject
     {
         /// <summary>

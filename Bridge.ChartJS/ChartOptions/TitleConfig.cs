@@ -5,9 +5,13 @@ namespace Bridge.ChartJS
     using Color = Union<string, CanvasGradient, CanvasPattern, string[], CanvasGradient[], CanvasPattern[]>;
 
     [Enum(Emit.StringName)]
+    [External]
     public enum Position
     {
-        Top, Left, Right, Bottom
+        Top,
+        Left,
+        Right,
+        Bottom
     }
 
     

@@ -32,6 +32,7 @@
     }
 
     [Enum(Emit.StringName)]
+    [External]
     public enum TimeUnit
     {
         Millisecond,

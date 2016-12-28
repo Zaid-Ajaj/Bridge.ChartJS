@@ -89,10 +89,4 @@ namespace Bridge.ChartJS
         [Template("Chart.defaults")]
         public static extern Defaults Defaults();
     }
-
-
-    public static class Extensions
-    {
-        
-    }
 }

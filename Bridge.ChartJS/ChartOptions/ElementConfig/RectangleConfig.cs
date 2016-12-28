@@ -28,5 +28,12 @@ namespace Bridge.ChartJS
     }
 
     [Enum(Emit.StringName)]
-    public enum BorderSkippedPattern { Top, Bottom, Left, Right }
+    [External]
+    public enum BorderSkippedPattern
+    {
+        Top,
+        Bottom,
+        Left,
+        Right
+    }
 }

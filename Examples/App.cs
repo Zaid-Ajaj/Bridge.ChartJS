@@ -36,7 +36,7 @@ namespace Examples
                             Label = "Today",
                             Data = new int[] { 65, 59, 90, 81, 56, 55, 40 },
                             PointRadius = 10,
-                            PointHoverRadius = 5,
+                            PointHoverRadius = 10,
                             BackgroundColor = RGB(0, 100, 255, 0.5),
                             PointHoverBackgroundColor = "blue",
                         },
@@ -45,25 +45,9 @@ namespace Examples
                             Label = "Yesterday",
                             Data = new int [] { 28, 48, 40, 19, 96, 27, 100 },
                             PointRadius = 10,
-                            PointHoverRadius = 5,
+                            PointHoverRadius = 10,
                             BackgroundColor = RGB(0, 255, 100, 0.4),
                             PointHoverBackgroundColor = "green",
-                        }
-                    }
-                },
-                Options = new ChartOptions
-                {
-                    Scales = new Scales
-                    {
-                        XAxis = new ScaleConfig[]
-                        {
-                            new ScaleConfig
-                            {
-                                Ticks = new TicksConfig
-                                {
-                                    
-                                }
-                            }  
                         }
                     }
                 }

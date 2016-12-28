@@ -157,4 +157,20 @@ Bridge.assembly("Bridge.ChartJS", function ($asm, globals) {
         },
         $utype: System.String
     });
+
+    Bridge.define("Bridge.ChartJS.TimeUnit", {
+        $kind: "enum",
+        statics: {
+            millisecond: "millisecond",
+            second: "second",
+            minute: "minute",
+            hour: "hour",
+            day: "day",
+            week: "week",
+            month: "month",
+            quarter: "quarter",
+            year: "year"
+        },
+        $utype: System.String
+    });
 });
